@@ -1,0 +1,22 @@
+# Bundled archives and installers (keep these files locally)
+/DP2026_ES/DP2026_ES.zip
+/DP2026_ES/DP2026_ES/Tools/*.exe
+/DP2026_ES/DP2026_ES/Tools/*.zip
+/DP2026_ES/DP2026_ES/Tools/*.pack
+/DP2026_ES/DP2026_ES/Tools/STM32_CUBE_MX/
+
+# Keil build artifacts
+*.o
+*.crf
+*.axf
+*.d
+*.dep
+*.lst
+*.map
+*.lnp
+*.build_log.htm
+**/MDK-ARM/*/*.htm
+
+# Per-user editor state and logs
+*.uvguix.*
+**/.vscode/*.log
