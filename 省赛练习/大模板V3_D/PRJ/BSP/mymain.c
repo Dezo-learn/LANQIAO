@@ -1,6 +1,6 @@
 #include "mymain.h"
-
-//****************Ä£¿é****************
+//2026/4/13 finished
+//****************Ä£ï¿½ï¿½****************
 struct BKEY
 {
     uint16_t press_time;
@@ -36,11 +36,11 @@ void Key_Serv(void)
     Key_val = Key_Read();
     for(uint8_t i = 1; i < 5;i++)
     {
-        if(Key_val == i) //°´ÏÂ
+        if(Key_val == i) //ï¿½ï¿½ï¿½ï¿½
         {
             bkey[i].press_time++;
         }
-        else             //ËÉÊÖ
+        else             //ï¿½ï¿½ï¿½ï¿½
         {
             if(bkey[i].press_time >= 100)
             {
@@ -76,16 +76,16 @@ void Key_Serv(void)
 
 
 
-//****************±äÁ¿****************
+//****************ï¿½ï¿½ï¿½ï¿½****************
 
 char str[50];
 uint8_t ucled = 0x00;
 uint8_t enable = 0;
 uint16_t led2_timer = 0;
 uint16_t led3_tick = 0;
-uint8_t LED3_ENABLE = 0; //0:ÈËÎª¹Ø±ÕLED
+uint8_t LED3_ENABLE = 0; //0:ï¿½ï¿½Îªï¿½Ø±ï¿½LED
 uint32_t adc1[2];
-uint32_t adc2[1];   //ADC±ØÐëÊÇ32Î»µÄ ÇÒDMAÀïÒ»¶¨Ò»¶¨Òª¿ªWORLD£¡£¡£¡
+uint32_t adc2[1];   //ADCï¿½ï¿½ï¿½ï¿½ï¿½ï¿½32Î»ï¿½ï¿½ ï¿½ï¿½DMAï¿½ï¿½Ò»ï¿½ï¿½Ò»ï¿½ï¿½Òªï¿½ï¿½WORLDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 float R37_Value = 0.0f;
 float R38_Value = 0.0f;
 uint8_t Page = 0;
@@ -100,7 +100,7 @@ char tx_buf[50];
 uint8_t eeprom_num;
 float MCP_Value;
 
-//****************Ö÷µ÷****************
+//****************ï¿½ï¿½ï¿½ï¿½****************
 void Set_up(void)
 {
     HAL_TIM_Base_Start_IT(&htim6);
@@ -135,7 +135,7 @@ void Loop(void)
 
 //****************IC****************
     R39_Value = 1000000.0f / (TIM2 -> CCR1 + 1);
-    R40_Value = 1000000.0f / (TIM3 -> CCR1 + 1); // ÏÖÊµ - 1 = ¼Ä´æÆ÷ÀïµÄÖµ
+    R40_Value = 1000000.0f / (TIM3 -> CCR1 + 1); // ï¿½ï¿½Êµ - 1 = ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
     R39_DUTY  = (float)(TIM2 -> CCR2 + 1) * 100.0f  / (float)(TIM2 -> CCR1 + 1);
     R40_DUTY  = (TIM3 -> CCR2 + 1) * 100.0f  / (TIM3 -> CCR1 + 1);
 
@@ -143,8 +143,8 @@ void Loop(void)
     TIM17 -> ARR = 1000000.0f / Real_Freq - 1;
     TIM17 -> CCR1 = 1000000.0f / Real_Freq * Real_Duty - 1;
 
-//****************°´¼ü****************
-    if(bkey[1].short_flag == 1) //°´¼ü1¶Ì°´ + LCDÏÔÊ¾ + LEDÕý³£·´×ª
+//****************ï¿½ï¿½ï¿½ï¿½****************
+    if(bkey[1].short_flag == 1) //ï¿½ï¿½ï¿½ï¿½1ï¿½Ì°ï¿½ + LCDï¿½ï¿½Ê¾ + LEDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ª
     {
         sprintf(str,"    KEY1_Down!    ");
         LCD_DisplayStringLine(Line0, (unsigned char *)str);
@@ -154,16 +154,16 @@ void Loop(void)
         
         bkey[1].short_flag = 0;
     }
-    if(bkey[2].long_flag == 1) //°´¼ü2³¤°´ + LCDÏÔÊ¾ + LED2µ¥´Î¼¤·¢
+    if(bkey[2].long_flag == 1) //ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ + LCDï¿½ï¿½Ê¾ + LED2ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½
     {
         sprintf(str,"    KEY2_HODE!    ");
         LCD_DisplayStringLine(Line0, (unsigned char *)str);
-        led2_timer = 100; //¼¤·¢Ò»Ãë
+        led2_timer = 100; //ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
         bkey[2].long_flag = 0;
     }
 
 
-    if(bkey[3].double_flag == 1) //°´¼ü3Ë«»÷ + LCDÏÔÊ¾ + LED2Ñ­»·¼¤·¢
+    if(bkey[3].double_flag == 1) //ï¿½ï¿½ï¿½ï¿½3Ë«ï¿½ï¿½ + LCDï¿½ï¿½Ê¾ + LED2Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         sprintf(str,"    KEY2_DOUBLE!    ");
         LCD_DisplayStringLine(Line0, (unsigned char *)str);
@@ -188,7 +188,7 @@ void Loop(void)
     }
 
 
-//****************MCPµçÎ»Æ÷****************
+//****************MCPï¿½ï¿½Î»ï¿½ï¿½****************
     MCP_Write(80); //  RW = 80 / 128 * 100
 
 
@@ -237,7 +237,7 @@ void Loop(void)
 
 
 
-//****************ÖÐ¶Ï****************
+//****************ï¿½Ð¶ï¿½****************
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if(htim == &htim6)
@@ -268,21 +268,21 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 }
 
 
-/* ledÏÔÊ¾µÄÌ×Â· £¨µ¥´Î¼¤·¢£©
-    // ÖÐ¶ÏÀï (10msÒ»´Î)
+/* ledï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Â· ï¿½ï¿½ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½
+    // ï¿½Ð¶ï¿½ï¿½ï¿½ (10msÒ»ï¿½ï¿½)
     if(timer > 0) timer--;
 
-    // LoopÀï
-    if(°´ÏÂ) timer = 100; // ³äÈë1ÃëµÄµç
-    if(timer > 0) LED_ON; else LED_OFF; //»á×Ô¶¯»Ø0
+    // Loopï¿½ï¿½
+    if(ï¿½ï¿½ï¿½ï¿½) timer = 100; // ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½Äµï¿½
+    if(timer > 0) LED_ON; else LED_OFF; //ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½0
 */ 
 
-/* ledÏÔÊ¾µÄÌ×Â· £¨Ñ­»·¼¤·¢£©
-// ÖÐ¶ÏÀï (10msÒ»´Î)
+/* ledï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Â· ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+// ï¿½Ð¶ï¿½ï¿½ï¿½ (10msÒ»ï¿½ï¿½)
 blink_tick++;
-if(blink_tick > 100) blink_tick = 1; // 1ÃëÒ»¸öÖÜÆÚ Å×Æú0  *²»È»ÉÏµçÕâ¸öLED»á×Ô¼ºÁÁ(Ö»ÓÐÕâ¸öÐèÒªÅ×Æú0)
+if(blink_tick > 100) blink_tick = 1; // 1ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½0  *ï¿½ï¿½È»ï¿½Ïµï¿½ï¿½ï¿½ï¿½LEDï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½(Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½0)
 
-// LoopÀï (0.5sÁÁ, 0.5sÃð)
+// Loopï¿½ï¿½ (0.5sï¿½ï¿½, 0.5sï¿½ï¿½)
 if(blink_tick <= 50 && blink_tick > 50) LED_ON; 
 else LED_OFF;
 */ 
